@@ -2,6 +2,27 @@ import User from '../models/User.js';
 import fs from 'fs';
 
 class userController {
+    static getUserSingalById = async(req, res) => {
+        const id =  req.params.id;
+           try {
+             const user = await User.findById(id);
+             const {name, email, avater} = user;
+             const getImageName =  avater.match(/\/([^\/?#]+)[^\/]*$/);
+             const singalUserData =  {
+                 name,
+                 email,
+                 imageUrl: `http://localhost:3000/api/v1/user/${getImageName[1]}`
+             }
+             res.status(201).json({
+                status_code: 201,
+                message: "Data Successfully!!",
+                data: singalUserData
+            }) 
+           } catch (error) {
+               console.log(error);
+           }
+    }
+
     static createUser = async(req, res) => {
         let payload = req.body;
         //image check if have then include image into payload
