@@ -9,9 +9,7 @@ class userController {
         payload.avater = imageUrl;
 
         try {
-            const newUser =  await new User({
-              payload
-            });
+            const newUser =   new User(payload);
             await newUser.save();
             res.status(201).json({
                 status_code: 201,

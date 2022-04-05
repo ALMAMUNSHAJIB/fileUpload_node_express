@@ -29,7 +29,7 @@ const fileUpload = (destination) => multer({
     }
 
 
-}).single('iamge');
+}).single('image');
 
 
 export default fileUpload;
